@@ -1,53 +1,35 @@
 package com.example.poligran.ui.slideshow
 
-import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebView
 import android.widget.MediaController
-import android.widget.TextView
 import android.widget.VideoView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.example.poligran.databinding.FragmentSlideshowBinding
+import com.example.poligran.R
+
 
 class SlideshowFragment : Fragment() {
 
-    private var _binding: FragmentSlideshowBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View {
-        val slideshowViewModel =
-            ViewModelProvider(this).get(SlideshowViewModel::class.java)
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val rootView = inflater.inflate(R.layout.fragment_slideshow, container, false)
 
-        _binding = FragmentSlideshowBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        val videoView = rootView.findViewById<VideoView>(R.id.videoView)
+        videoView.setVideoPath("https://cdn.flowplayer.com/a30bd6bc-f98b-47bc-abf5-97633d4faea0/hls/de3f6ca7-2db3-4689-8160-0f574a5996ad/playlist.m3u8") // Set the URL or local path
 
-        val videoView: VideoView = binding.videoView
 
-        val onlineurl: Uri = Uri.parse("https://www.youtube.com/watch?v=Jd3nTm-wvyA")
-        videoView.setVideoURI(onlineurl)
-        videoView.requestFocus()
-        videoView.start()
+        val mediaController = MediaController(context)
+        mediaController.setAnchorView(videoView)
+        videoView.setMediaController(mediaController)
 
-        val textView: TextView = binding.textSlideshow
-        slideshowViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
-    }
+        videoView.start() // Start playing
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        return rootView
+
     }
 }

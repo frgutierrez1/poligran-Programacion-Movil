@@ -1,11 +1,10 @@
 package com.example.poligran
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
-import android.widget.MediaController
-import android.widget.VideoView
-import com.google.android.material.snackbar.Snackbar
+import android.widget.Button
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -15,6 +14,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.example.poligran.databinding.ActivityMainBinding
+import com.google.android.material.textfield.TextInputEditText
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,6 +29,16 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
+        val goButton = findViewById<Button>(R.id.goButton)
+        val urlEditText = findViewById<TextInputEditText>(R.id.urlEditText)
+
+        goButton.setOnClickListener {
+            val url = urlEditText.text.toString().trim()
+            if (url.isNotEmpty()) {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                startActivity(intent)
+            }
+        }
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
@@ -48,6 +58,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
+
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
