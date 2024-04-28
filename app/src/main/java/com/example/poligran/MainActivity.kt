@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         goButton.setOnClickListener {
             val url = urlEditText.text.toString().trim()
             if (url.isNotEmpty()) {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www."+url))
                 startActivity(intent)
             }
         }
