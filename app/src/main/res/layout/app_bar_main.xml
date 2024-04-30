@@ -34,26 +34,4 @@
         android:id="@+id/include"
         layout="@layout/content_main" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="bottom|center">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/urlEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Ingrese url" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/goButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ir"
-        app:layout_anchor="@+id/textInputLayout"
-        app:layout_anchorGravity="end|center" />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

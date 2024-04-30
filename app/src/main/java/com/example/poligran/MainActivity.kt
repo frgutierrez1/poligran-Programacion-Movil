@@ -29,16 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
-        val goButton = findViewById<Button>(R.id.goButton)
-        val urlEditText = findViewById<TextInputEditText>(R.id.urlEditText)
 
-        goButton.setOnClickListener {
-            val url = urlEditText.text.toString().trim()
-            if (url.isNotEmpty()) {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www."+url))
-                startActivity(intent)
-            }
-        }
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
